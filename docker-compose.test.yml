@@ -1,0 +1,75 @@
+version: '3.8'
+
+# Test environment with minimal resources and test data
+services:
+  zookeeper-test:
+    image: confluentinc/cp-zookeeper:7.5.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    tmpfs:
+      - /var/lib/zookeeper/data
+      - /var/lib/zookeeper/log
+
+  kafka-test:
+    image: confluentinc/cp-kafka:7.5.0
+    depends_on:
+      - zookeeper-test
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper-test:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-test:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    tmpfs:
+      - /var/lib/kafka/data
+
+  elasticsearch-test:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms256m -Xmx512m"
+    tmpfs:
+      - /usr/share/elasticsearch/data
+
+  redis-test:
+    image: redis:7.2-alpine
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+    tmpfs:
+      - /data
+
+  postgresql-test:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: agentic_soc_test
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+    tmpfs:
+      - /var/lib/postgresql/data
+
+  # Test runner service
+  test-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    depends_on:
+      - kafka-test
+      - elasticsearch-test
+      - redis-test
+      - postgresql-test
+    environment:
+      - TEST_MODE=true
+      - KAFKA_BOOTSTRAP_SERVERS=kafka-test:29092
+      - ELASTICSEARCH_URL=http://elasticsearch-test:9200
+      - REDIS_URL=redis://redis-test:6379
+      - DATABASE_URL=postgresql://test_user:test_password@postgresql-test:5432/agentic_soc_test
+    volumes:
+      - .:/app
+      - ./tests:/app/tests
+      - ./data/test-data:/app/test-data
+    command: pytest tests/ -v --cov=src/ --cov-report=html --cov-report=term

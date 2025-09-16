@@ -1,0 +1,122 @@
+[
+  {
+    "id": "89184b38-d087-4efe-abaa-58bdb764327e",
+    "timestamp": "2025-09-12T05:09:13.062845",
+    "event_type": "privilege_escalation",
+    "source": "siem",
+    "source_ip": "192.168.209.238",
+    "user": "user_1324",
+    "asset": "asset_178",
+    "severity": "low",
+    "status": "failed",
+    "description": "Sample network scan event for testing"
+  },
+  {
+    "id": "05515303-e160-4a99-8d9a-86ee55496838",
+    "timestamp": "2025-09-12T05:20:13.062906",
+    "event_type": "malware_detected",
+    "source": "siem",
+    "source_ip": "192.168.39.53",
+    "user": "user_2463",
+    "asset": "asset_940",
+    "severity": "critical",
+    "status": "failed",
+    "description": "Sample data exfiltration event for testing"
+  },
+  {
+    "id": "7465729b-fea5-419e-b654-faa5d284ede7",
+    "timestamp": "2025-09-12T10:52:13.062921",
+    "event_type": "privilege_escalation",
+    "source": "email_security",
+    "source_ip": "192.168.200.189",
+    "user": "user_1775",
+    "asset": "asset_764",
+    "severity": "medium",
+    "status": "failed",
+    "description": "Sample network scan event for testing"
+  },
+  {
+    "id": "c60b0101-b894-43d3-bd1b-e1d2f7cd87b2",
+    "timestamp": "2025-09-11T12:55:13.062934",
+    "event_type": "malware_detected",
+    "source": "edr",
+    "source_ip": "192.168.114.205",
+    "user": "user_3942",
+    "asset": "asset_935",
+    "severity": "low",
+    "status": "quarantined",
+    "description": "Sample suspicious process event for testing"
+  },
+  {
+    "id": "7ba7989a-678d-4b72-963f-7f7714cd4682",
+    "timestamp": "2025-09-12T06:45:13.062943",
+    "event_type": "suspicious_process",
+    "source": "edr",
+    "source_ip": "192.168.145.6",
+    "user": "user_1515",
+    "asset": "asset_385",
+    "severity": "medium",
+    "status": "quarantined",
+    "description": "Sample login attempt event for testing"
+  },
+  {
+    "id": "59581547-921a-465b-971a-5c28e81e112c",
+    "timestamp": "2025-09-12T12:14:13.062950",
+    "event_type": "suspicious_process",
+    "source": "ndr",
+    "source_ip": "192.168.70.151",
+    "user": "user_1915",
+    "asset": "asset_294",
+    "severity": "low",
+    "status": "quarantined",
+    "description": "Sample login attempt event for testing"
+  },
+  {
+    "id": "7fd5a974-a0ba-4f66-abd3-ca40a38f0902",
+    "timestamp": "2025-09-11T22:05:13.062958",
+    "event_type": "suspicious_process",
+    "source": "siem",
+    "source_ip": "192.168.161.229",
+    "user": "user_7321",
+    "asset": "asset_175",
+    "severity": "high",
+    "status": "success",
+    "description": "Sample login attempt event for testing"
+  },
+  {
+    "id": "09f4ea98-5335-46d4-9123-9b066b562d34",
+    "timestamp": "2025-09-11T18:30:13.062965",
+    "event_type": "network_scan",
+    "source": "edr",
+    "source_ip": "192.168.248.196",
+    "user": "user_4472",
+    "asset": "asset_209",
+    "severity": "high",
+    "status": "quarantined",
+    "description": "Sample data exfiltration event for testing"
+  },
+  {
+    "id": "8731ccd6-e8a0-4617-add4-42c003f67998",
+    "timestamp": "2025-09-11T17:53:13.062976",
+    "event_type": "malware_detected",
+    "source": "ndr",
+    "source_ip": "192.168.114.164",
+    "user": "user_9623",
+    "asset": "asset_865",
+    "severity": "critical",
+    "status": "success",
+    "description": "Sample login attempt event for testing"
+  },
+  {
+    "id": "18201bfb-0b55-4a49-85ae-ac0033409fcc",
+    "timestamp": "2025-09-12T09:51:13.062983",
+    "event_type": "malware_detected",
+    "source": "email_security",
+    "source_ip": "192.168.73.234",
+    "user": "user_9101",
+    "asset": "asset_253",
+    "severity": "critical",
+    "status": "success",
+    "description": "Sample login attempt event for testing"
+  }
+]
